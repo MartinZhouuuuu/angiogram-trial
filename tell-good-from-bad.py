@@ -26,23 +26,22 @@ model.add(Dropout(0.5))
 model.add(Dense(1, activation = 'softmax'))
 model.compile(optimizer = 'adam', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
-def augment(image):
-	aug_1 = iaa.Crop(
-		px = (int((image.shape[1]-360)/2)),
-		keep_size = False)
-	image = aug_1.augment_image(image)
-	return image
 train_datagen = ImageDataGenerator(
 	rescale =  1./255,
-	preprocessing_function = augment
+	zoom_range = 0.05,
+	fill_mode = 'nearest',
+	featurewise_center = True,
+	featurewise_std_normalization = True,
+	width_shift_range = 0.05,
+	height_shift_range = 0.05,
+	rotation_range = 0.2
 	)
 train_generator = train_datagen.flow_from_directory(
 	'good-bad',
-	target_size = train_datagen.shape,
+	target_size = (360,360),
 	batch_size = 1,
 	class_mode = 'binary',
 	color_mode = 'grayscale',
-	save_to_dir = 'good-bad/aug'
 	)
 '''test_datagen = ImageDataGenerator(
 	rescale = 1./255,
@@ -57,7 +56,7 @@ test_generator = test_datagen.flow_from_directory(
 
 model.fit_generator(
 	train_generator,
-	steps_per_epoch = 60000,
+	steps_per_epoch = 600,
 	epochs = 30,
 	)
 '''validation_data = test_generator,
