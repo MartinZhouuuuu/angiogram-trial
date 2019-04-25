@@ -13,9 +13,10 @@ def extract_frames(path):
 			):
 			os.makedirs('/Users/apple/Google Drive/angiogram-trial/extracted-frames/%s'%path.replace('.mp4',''))
 		cv2.imwrite(
-			'/Users/apple/Google Drive/angiogram-trial/extracted-frames/%s/frame%d.jpg'%(path.replace('.mp4',''),count), image)
+			'/Users/apple/Google Drive/angiogram-trial/extracted-frames/%s/%s-frame%d.jpg'%
+			(path.replace('.mp4',''),path.replace('.mp4',''),count), image)
 	
 	os.remove(
-		'/Users/apple/Google Drive/angiogram-trial/extracted-frames/%s/frame%d.jpg'%(path.replace('.mp4',''),count)
+		'/Users/apple/Google Drive/angiogram-trial/extracted-frames/%s/%s-frame%d.jpg'%(path.replace('.mp4',''),path.replace('.mp4',''), count)
 		)
 extract_frames('nejm.mp4')
