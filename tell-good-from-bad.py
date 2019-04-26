@@ -42,27 +42,28 @@ train_datagen = ImageDataGenerator(
 	rotation_range = 0.2
 	)
 train_generator = train_datagen.flow_from_directory(
-	'good-bad',
+	'train',
 	target_size = (360,360),
 	batch_size = 16,
 	class_mode = 'categorical',
 	color_mode = 'grayscale',
 	)
-'''test_datagen = ImageDataGenerator(
-	rescale = 1./255,
-	preprocessing_function = augmentation)
+test_datagen = ImageDataGenerator(
+	rescale = 1./255)
 
 test_generator = test_datagen.flow_from_directory(
-	'testSet',
-	target_size = (28,28),
-	batch_size = 1,
+	'test',
+	target_size = (360,360),
+	batch_size = 16,
 	class_mode = 'categorical',
-	color_mode = 'grayscale')'''
+	color_mode = 'grayscale')
 
 model.fit_generator(
 	train_generator,
 	steps_per_epoch = 6000,
 	epochs = 30,
+	validation_data = test_generator,
+	validation_steps = 1000
 	)
 '''validation_data = test_generator,
 validation_steps = 1000'''
