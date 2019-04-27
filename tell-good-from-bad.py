@@ -42,7 +42,7 @@ train_datagen = ImageDataGenerator(
 	vertical_flip = True
 	)
 train_generator = train_datagen.flow_from_directory(
-	'train',
+	'good-bad/train',
 	target_size = (360,360),
 	batch_size = 16,
 	class_mode = 'binary',
@@ -53,7 +53,7 @@ test_datagen = ImageDataGenerator(
 	)
 
 test_generator = test_datagen.flow_from_directory(
-	'test',
+	'good-bad/test',
 	target_size = (360,360),
 	batch_size = 16,
 	class_mode = 'binary',
