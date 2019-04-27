@@ -6,9 +6,9 @@ def crop_images(path):
 	count = 0
 	for image in images:
 		crop_image = image[:,int((image.shape[1]-360)/2):int((image.shape[1]-360)/2+360)]
-		cv2.imwrite('/Users/apple/Google Drive/angiogram-trial/test/good/good-%d.jpg'%count,crop_image)
+		cv2.imwrite('/Users/apple/Google Drive/angiogram-trial/lca-rca/train/rca/rca-%d.jpg'%count,crop_image)
 		count +=1
-crop_images('/Users/apple/Google Drive/angiogram-trial/good-bad-unsliced/good-test/*.jpg')
+crop_images('/Users/apple/Desktop/rca/*.jpg')
 
 '''image = cv2.imread('/Users/apple/Google Drive/angiogram-trial/good-bad/good/angio1-frame20.jpg')
 crop_image = image[:,140:500]
