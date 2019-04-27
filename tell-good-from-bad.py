@@ -7,16 +7,16 @@ from tensorflow.keras.regularizers import *
 model = Sequential()
 #convolution
 model.add(Conv2D(32,(3,3), activation = 'relu', 
-	input_shape = (360,360,1),kernel_regularizer = l2(0.01)))
+	input_shape = (360,360,1)))
 model.add(MaxPooling2D((2,2)))
 model.add(Dropout(0.25))
-model.add(Conv2D(32,(3,3), activation = 'relu',kernel_regularizer = l2(0.01)))
+model.add(Conv2D(32,(3,3), activation = 'relu'))
 model.add(MaxPooling2D((2,2)))
 model.add(Dropout(0.25))
-model.add(Conv2D(64,(3,3),activation = 'relu',kernel_regularizer = l2(0.01)))
+model.add(Conv2D(64,(3,3),activation = 'relu'))
 model.add(MaxPooling2D((2,2)))
 model.add(Dropout(0.25))
-model.add(Conv2D(64,(3,3),activation = 'relu',kernel_regularizer = l2(0.01)))
+model.add(Conv2D(64,(3,3),activation = 'relu'))
 model.add(MaxPooling2D(2,2))
 model.add(Dropout(0.25))
 model.add(Flatten())
@@ -26,10 +26,10 @@ model.add(Dense(64,activation = 'relu'))
 model.add(Dropout(0.5))
 model.add(Dense(32,activation = 'relu'))
 model.add(Dropout(0.5))'''
-model.add(Dense(64,activation = 'relu',kernel_regularizer = l2(0.01)))
+model.add(Dense(64,activation = 'relu'))
 model.add(Dropout(0.5))
-model.add(Dense(2, activation = 'softmax'))
-model.compile(optimizer = 'adam', loss = 'categorical_crossentropy', metrics = ['accuracy'])
+model.add(Dense(1, activation = 'softmax'))
+model.compile(optimizer = 'rmsprop', loss = 'binary_crossentropy', metrics = ['accuracy'])
 
 train_datagen = ImageDataGenerator(
 	rescale =  1./255,
@@ -45,17 +45,20 @@ train_generator = train_datagen.flow_from_directory(
 	'train',
 	target_size = (360,360),
 	batch_size = 16,
-	class_mode = 'categorical',
+	class_mode = 'binary',
 	color_mode = 'grayscale',
 	)
 test_datagen = ImageDataGenerator(
-	rescale = 1./255)
+	rescale = 1./255,
+	featurewise_center = True,
+	featurewise_std_normalization = True
+	)
 
 test_generator = test_datagen.flow_from_directory(
 	'test',
 	target_size = (360,360),
 	batch_size = 16,
-	class_mode = 'categorical',
+	class_mode = 'binary',
 	color_mode = 'grayscale')
 
 model.fit_generator(
