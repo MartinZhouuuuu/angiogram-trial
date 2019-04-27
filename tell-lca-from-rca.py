@@ -30,10 +30,7 @@ train_datagen = ImageDataGenerator(
 	fill_mode = 'nearest',
 	width_shift_range = 0.2,
 	height_shift_range = 0.2,
-	rotation_range = 30,
-	zca_whitening = True,
-	featurewise_center = True,
-	featurewise_std_normalization = True
+	rotation_range = 15,
 	)
 train_generator = train_datagen.flow_from_directory(
 	'lca-rca/train',
@@ -43,10 +40,7 @@ train_generator = train_datagen.flow_from_directory(
 	color_mode = 'grayscale',
 	)
 test_datagen = ImageDataGenerator(
-	rescale = 1./255,
-	zca_whitening = True,
-	featurewise_center = True,
-	featurewise_std_normalization = True
+	rescale = 1./255
 	)
 '''featurewise_center = True,
 featurewise_std_normalization = True'''
