@@ -30,6 +30,9 @@ train_datagen = ImageDataGenerator(
 	fill_mode = 'nearest',
 	width_shift_range = 0.05,
 	height_shift_range = 0.05,
+	zca_whitening = True,
+	featurewise_center = True,
+	featurewise_std_normalization = True
 	)
 train_generator = train_datagen.flow_from_directory(
 	'lca-rca/train',
@@ -40,6 +43,9 @@ train_generator = train_datagen.flow_from_directory(
 	)
 test_datagen = ImageDataGenerator(
 	rescale = 1./255,
+	zca_whitening = True,
+	featurewise_center = True,
+	featurewise_std_normalization = True
 	)
 
 test_generator = test_datagen.flow_from_directory(
@@ -51,10 +57,10 @@ test_generator = test_datagen.flow_from_directory(
 
 model.fit_generator(
 	train_generator,
-	steps_per_epoch = 6000,
+	steps_per_epoch = 2000,
 	epochs = 30,
 	validation_data = test_generator,
-	validation_steps = 10
+	validation_steps = 500
 	)
 '''validation_data = test_generator,
 validation_steps = 1000'''
