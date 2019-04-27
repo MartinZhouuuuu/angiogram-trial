@@ -35,8 +35,6 @@ train_datagen = ImageDataGenerator(
 	rescale =  1./255,
 	zoom_range = 0.05,
 	fill_mode = 'nearest',
-	featurewise_center = True,
-	featurewise_std_normalization = True,
 	width_shift_range = 0.05,
 	height_shift_range = 0.05,
 	rotation_range = 0.2,
@@ -52,8 +50,6 @@ train_generator = train_datagen.flow_from_directory(
 	)
 test_datagen = ImageDataGenerator(
 	rescale = 1./255,
-	featurewise_center = True,
-	featurewise_std_normalization = True
 	)
 
 test_generator = test_datagen.flow_from_directory(
@@ -67,6 +63,8 @@ model.fit_generator(
 	train_generator,
 	steps_per_epoch = 6000,
 	epochs = 30,
+	validation_data = test_generator,
+	validation_steps = 100
 	)
 '''validation_data = test_generator,
 validation_steps = 1000'''
