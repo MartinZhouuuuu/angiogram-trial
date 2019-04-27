@@ -30,6 +30,7 @@ train_datagen = ImageDataGenerator(
 	fill_mode = 'nearest',
 	width_shift_range = 0.2,
 	height_shift_range = 0.2,
+	rotation_range = 30,
 	zca_whitening = True,
 	featurewise_center = True,
 	featurewise_std_normalization = True
