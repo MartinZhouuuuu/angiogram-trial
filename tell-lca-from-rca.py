@@ -26,15 +26,14 @@ model.compile(optimizer = 'rmsprop', loss = 'binary_crossentropy', metrics = ['a
 
 train_datagen = ImageDataGenerator(
 	rescale =  1./255,
-	zoom_range = 0.05,
+	zoom_range = 0.2,
 	fill_mode = 'nearest',
-	width_shift_range = 0.05,
-	height_shift_range = 0.05,
+	width_shift_range = 0.2,
+	height_shift_range = 0.2,
 	zca_whitening = True,
-	
+	featurewise_center = True,
+	featurewise_std_normalization = True
 	)
-'''featurewise_center = True,
-	featurewise_std_normalization = True'''
 train_generator = train_datagen.flow_from_directory(
 	'lca-rca/train',
 	target_size = (360,360),
@@ -45,7 +44,8 @@ train_generator = train_datagen.flow_from_directory(
 test_datagen = ImageDataGenerator(
 	rescale = 1./255,
 	zca_whitening = True,
-
+	featurewise_center = True,
+	featurewise_std_normalization = True
 	)
 '''featurewise_center = True,
 featurewise_std_normalization = True'''
